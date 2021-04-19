@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    service: mysql
+  name: mysql
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      service: mysql
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        service: mysql
+    spec:
+      containers:
+      - image: gitlab-ee.coc-ibm.com:5050/robot-shop/mysql/master:latest
+        imagePullPolicy: IfNotPresent
+        name: mysql
+        ports:
+        - containerPort: 3306
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 200m
+            memory: 1Gi
+          requests:
+            cpu: 100m
+            memory: 700Mi
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30

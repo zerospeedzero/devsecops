@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    service: dispatch
+  name: dispatch
+spec:
+  ports:
+  - name: headless
+    port: 55555
+    protocol: TCP
+    targetPort: 55555
+  selector:
+    service: dispatch
+  sessionAffinity: None
+  type: ClusterIP

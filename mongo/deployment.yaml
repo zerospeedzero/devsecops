@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    service: mongodb
+  name: mongodb
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      service: mongodb
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        service: mongodb
+    spec:
+      containers:
+      - image: gitlab-ee.coc-ibm.com:5050/robot-shop/mongo/master:latest
+        imagePullPolicy: IfNotPresent
+        name: mongodb
+        ports:
+        - containerPort: 27017
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 200m
+            memory: 200Mi
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /data/db
+          name: volume-4gbmc
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: volume-4gbmc
+        persistentVolumeClaim:
+          claimName: mongo-data
