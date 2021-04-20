@@ -25,7 +25,7 @@ spec:
       containers:
       - env:
         - name: INSTANA_EUM_KEY
-          value: INSTANA_EUM_KEY
+          value: UaaNHIt3SeCfkZzzq_IfOA
         - name: INSTANA_EUM_REPORTING_URL
           value: http://instana.ibmdemo.local:86/eum/
         - name: INSTANA_SERVICE_NAME
