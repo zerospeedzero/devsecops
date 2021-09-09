@@ -86,7 +86,7 @@ c. Store Calls of Downstream Services : "All downstream services"
 d. Select the Default Dashboard View : "All Calls"
 ```
 e.g.
-![Alt text](./pic/applicationsettings.png?raw=true) 
+![Alt text](./pic/applicationsettings.png?raw=true)   
 7. Click "Create" button and you will be return to the "Application" page of Instana. You should find the application perspective you have just created.  
 ![Alt text](./pic/applicationsummary.png?raw=true)  
 
@@ -107,6 +107,7 @@ oc set env deploy/web INSTANA_EUM_REPORTING_URL="http://169.56.149.162:2999" INS
 watch 'oc get pod'
 ```
 ![Alt text](./pic/setinemkey.png?raw=true)   
+
 6. Expose the web service as route for external Web Access    
 ```bash
 oc project
@@ -134,13 +135,12 @@ oc get route
 13. Go back to the website monitoring. You will see EUM data on the dashboard. Optional, if time allowed, you may drill down the end-to-end transaction result on this page later.
 ![Alt text](./pic/websitedashboard.png?raw=true)
 ### Lab 4 : Application perspective monitoring  
-1: Click "Application perspective" icon on the left toolbar and then your application created in previous lab. You should be able to inspect the Application in Instana  
-
-![Alt text](./pic/example1.png?raw=true) 
-2: Click "Dependencies" tab
+1. Click "Application perspective" icon on the left toolbar and then your application created in previous lab. You should be able to inspect the Application in Instana  
+![Alt text](./pic/example1.png?raw=true)  
+2. Click "Dependencies" tab
 ![Alt text](./pic/example2.png?raw=true) 
-3. Click "Services" tab
-![Alt text](./pic/example3.png?raw=true) 
+3. Click "Services" tab  
+![Alt text](./pic/example3.png?raw=true)  
 4. Click "Analyze Calls" on above screen and you will get the services and API endpoint breakdown as below.
 ![Alt text](./pic/example4.png?raw=true) 
 5. Click Service.Name "payment" and then click one of the "POST /pay/anonymous-xxx" API endpoint call instance. 
@@ -161,5 +161,5 @@ oc get route
 4.  Click "Business Application" and then your application  
 ![Alt text](./pic/turbodashboard.png?raw=true) 
 ![Alt text](./pic/turboapp.png?raw=true) 
-
+![Alt text](./pic/turboapp1.png?raw=true) 
 # End of the page
