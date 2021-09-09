@@ -1,4 +1,4 @@
-!/bin/sh
+#!/usr/bin/bash
 echo "What is your OpenShift project?"
 read project
 
