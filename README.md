@@ -1,4 +1,4 @@
-# Skill enablement for IBM Instana and Turbonomic 
+# Skill enablement for IBM Instana and Turbonomic
 
 ## References for IBM AIOPs products
 More reference documentation and links as below
