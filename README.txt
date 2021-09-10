@@ -1,5 +1,5 @@
-WiFi
-====
+WiFi SSID: IBMInternet
+======================
 ns-{1..5}
 Username:uuser101
 Password:q49khufc
