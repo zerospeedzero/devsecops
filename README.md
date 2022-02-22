@@ -1,13 +1,14 @@
-# Skill enablement for IBM Instana and Turbonomic
+# DevSecOps workshop for customer
 
 ## References for IBM AIOPs products
 More reference documentation and links as below
 
-1. Source code of Robot Shop : https://github.com/instana/robot-shop 
-2. Instana documentation : https://www.instana.com/docs/
-3. SaaS free demo of Instana : https://play-with.instana.io
-4. 14 days free trial of Instana : https://www.instana.com/trial/
-5. Turbonomic website : https://www.turbonomic.com/
+1. GitLab Ultimate for IBM Cloud Paks : https://www.ibm.com/hk-en/products/gitlab-ultimate
+2. Source code of Robot Shop : https://github.com/instana/robot-shop 
+3. Instana documentation : https://www.instana.com/docs/
+4. SaaS free demo of Instana : https://play-with.instana.io
+5. 14 days free trial of Instana : https://www.instana.com/trial/
+6. Turbonomic website : https://www.turbonomic.com/
 
 ## Hand-on Lab environment
 ### Pre-requisite of attending this hand-on labs   
@@ -28,13 +29,18 @@ More reference documentation and links as below
 ## Labs for Instana and Turbonomic
 ### Lab 1 : Deploy and start Robot Shop microservice  
 1. Login to  Openshift Web console and input the IBMID provided in the Lab  
-Open browser with URL : https://console-openshift-console.ibmcloud-roks-l9coij25-4b4a324f027aea19c5cbc0c3275c4656-0000.hkg02.containers.appdomain.cloud/  (username/password will be provided in lab)  
+Open browser with URL : https://console-openshift-console.itzroks-060000f2ee-hx8q5z-4b4a324f027aea19c5cbc0c3275c4656-0000.hkg02.containers.appdomain.cloud/ (Your IBMID registered in IBM Cloud https://cloud.ibm.com e.g temp2222temp@gmail.com in this lab example)  
 ![Alt text](./pic/ibmlogin.png?raw=true) 
 
 2. Dasboard of RedHat OpenShift will be shown as below (Be reminded you are now logged in as OCP cluster admin and you get privilege to perform cluster level destructive actions. Just focus on your own OCP project please)  
 ![Alt text](./pic/ocpproject.png?raw=true) 
 
-3. Start the OpenShift web terminate by click the >_ button on the top right concer of the OCP Web GUI.    
+2. Create an new OpenShift project to host your microservice applications. Click "Home"->"Project" and then click "Create Project" button and name the project ns-{1-20}. The project number will be assigned during the workshop. e.g. ns-6
+![Alt text](./pic/createproject1.png?raw=true)  
+![Alt text](./pic/createproject2.png?raw=true)  
+
+
+3. Start the OpenShift web terminal by click the >_ button on the top right concer of the OCP Web GUI. It may take one or several minutes for the terminal to show up.   
 ![Alt text](./pic/webterminal.png?raw=true)  
 
 4. Switch to OpenShift project to contain all microservices under Robot Shop for each student. Execute the command 'oc project ns{1-20}'. Ensure you switch to an correct project and don't fix up with other students. e.g.    

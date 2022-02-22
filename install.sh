@@ -11,7 +11,7 @@ fi
 
 echo "Deploy Robot-shop application under project $project"
 
-cd /home/user/robot-shop
+cd /home/user/devsecops
 for i in `ls |egrep -v 'README|pic|install'`
 do
     oc apply -f $i -n $project
