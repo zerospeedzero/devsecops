@@ -1,4 +1,4 @@
-# DevSecOps workshop for customer
+# DevSecOps workshop for customer (Work in progress)
 
 ## References for IBM AIOPs products
 More reference documentation and links as below
@@ -16,7 +16,8 @@ More reference documentation and links as below
 1. Workstation OS: Windows 10, Mac or Linux  
 2. Browser : Firefox or Chrome  
 3. Network : Internet Connection  
-4. Workstation privilege : Change browser setting for proxy (provided in Lab)  
+4. Workstation privilege : Change browser setting for proxy (provided in Lab)
+5. IBMID (register it from https://cloud.ibm.com and send your email to chenggck@hk1.ibm.com)  
 
 ### Lab environment description 
 
@@ -26,7 +27,7 @@ More reference documentation and links as below
 4. An Instana backend server is deployed within an virtual server.
 5. Access link and account name with password will be provided.    
 
-## Labs for Instana and Turbonomic
+## Labs for GitLab and Instana and Turbonomic
 ### Lab 1 : Deploy and start Robot Shop microservice  
 1. Login to  Openshift Web console and input the IBMID provided in the Lab  
 Open browser with URL : https://console-openshift-console.itzroks-060000f2ee-hx8q5z-4b4a324f027aea19c5cbc0c3275c4656-0000.hkg02.containers.appdomain.cloud/ (Your IBMID registered in IBM Cloud https://cloud.ibm.com e.g temp2222temp@gmail.com in this lab example)  
@@ -35,15 +36,10 @@ Open browser with URL : https://console-openshift-console.itzroks-060000f2ee-hx8
 2. Dasboard of RedHat OpenShift will be shown as below (Be reminded you are now logged in as OCP cluster admin and you get privilege to perform cluster level destructive actions. Just focus on your own OCP project please)  
 ![Alt text](./pic/ocpproject.png?raw=true) 
 
-2. Create an new OpenShift project to host your microservice applications. Click "Home"->"Project" and then click "Create Project" button and name the project ns-{1-20}. The project number will be assigned during the workshop. e.g. ns-6
-![Alt text](./pic/createproject1.png?raw=true)  
-![Alt text](./pic/createproject2.png?raw=true)  
-
-
 3. Start the OpenShift web terminal by click the >_ button on the top right concer of the OCP Web GUI. It may take one or several minutes for the terminal to show up.   
 ![Alt text](./pic/webterminal.png?raw=true)  
 
-4. Switch to OpenShift project to contain all microservices under Robot Shop for each student. Execute the command 'oc project ns{1-20}'. Ensure you switch to an correct project and don't fix up with other students. e.g.    
+4. Switch to OpenShift project to contain all microservices under Robot Shop for each student. Execute the command 'oc project ns{1-20}'. Ensure you switch to an correct project and don't fix up with other students. e.g.
 ```bash
 oc project ns-6
 oc project
@@ -53,8 +49,8 @@ oc project
 5. Execute the following steps to deploy all microservices under Robot Shop.    
 ```bash
 oc project ns-6
-cd robot-shop
-pwd
+git clone https://github.com/zerospeedzero/devsecops.git
+cd devsecops
 ./install.sh 
 ```
 ![Alt text](./pic/createappservice.png?raw=true)  
@@ -70,7 +66,8 @@ Also, you is able to check the deployment status of those services via OCP Web G
 
 ### Lab 2 : Access to Instana server and create application perspective  
 
-1. Ensure to you have configured the browser proxy settings according to the parameters provided by the Lab. Otherwise, you are not able to access to the Instana backend server via browser (since the server is located on privated on-premise environment which require proxy server to access)  
+1. Ensure to you have configured the browser proxy settings according to the parameters provided by the Lab. Otherwise, you are not able to access to the Instana backend server via browser (since the server is located on privated on-premise environment which require proxy server to access)
+
 2. Login to Instana Web GUI https://instana.ibmdemo.local using admin@instana.local account with its password.         
 ![Alt text](./pic/instanalogin.png?raw=true) 
 
@@ -79,10 +76,11 @@ Also, you is able to check the deployment status of those services via OCP Web G
 
 4. Click "+ Add" button located at right bottem concer and then click "+ New Application Perspective". It will prompt an dialog "New Application Perspective"   
 ![Alt text](./pic/newapplicationperspective.png?raw=true) 
+
 5. Click "Switch to Advanced Mode" located right top concer.             
 ![Alt text](./pic/switch.png?raw=true) 
 
-6. Provide the following information for the application perspective for your OpenShift project created in previous lab execrise. For example, ns-6 
+6. Provide the following information for the application perspective for your OpenShift project created in previous lab execrise. For example, ns-6
 ```bash
 a. Application Perspective Name : ns-{1-25}
 e.g. ns-6
@@ -98,7 +96,7 @@ e.g.
 
 ### Lab 3 : Expose Robot Shop application for End User Monitoring  
 1. On the Instana Dashboard, click "Websites & Mobile Apps" icon on the left toolbar.
-![Alt text](./pic/websitemobileapps.png?raw=true)  
+![Alt text](./pic/websitemobileapps.png?raw=true)
 2. Click "+ Add Website" button
 ![Alt text](./pic/addwebsites.png?raw=true)  
 3. Give its name as ns-{1..25}. e.g. ns-6. Click "Add Website" button
@@ -109,7 +107,7 @@ e.g.
 5. Access to the web terminal in previous setup. Assign the inum.key to web services so that browser will load with client side javascript to track end-to-end transaction for end user monitoring. Please ensure you are on the correct OpenShift project you use before. Check the web pod is restarted and in running state.    
 ```bash
 oc project
-oc set env deploy/web INSTANA_EUM_REPORTING_URL="http://169.56.149.162:2999" INSTANA_EUM_KEY=<inem.key>
+oc set env deploy/web INSTANA_EUM_REPORTING_URL="http://161.202.37.163:2999" INSTANA_EUM_KEY=<inem.key>
 watch 'oc get pod'
 ```
 ![Alt text](./pic/setinemkey.png?raw=true)   
@@ -155,7 +153,41 @@ oc get route
 6. Try to navigate to catalogue service and to inpsect the data flow as below. Optional, if time allowed, you may drill down application observability and tracing results on this page later.
 ![Alt text](./pic/example7.png?raw=true) 
 
-### Lab 5 : Assure application performance by Turbonomic
+### Lab 6 : Tailer Catalog microservice using GitLab 
+1. Login to GitLab server using your account. e.g. ns-6
+![Alt text](./pic/gitlablogin.png?raw=true)
+
+2. Change the password (you may use the same current password)
+![Alt text](./pic/gitlabchangepassword.png?raw=true)
+
+3. Click "Create a project"
+![Alt text](./pic/createnewproject.png?raw=true)
+
+4. Click "Create blank project"
+![Alt text](./pic/createblankproject.png?raw=true)
+
+5. Input the project name as "catalogue" and make the visibility level as Public and then click "Create Project" button.
+![Alt text](./pic/createcataloguebutton.png?raw=true)
+
+6. Create "Clone" button and copy the URL link of "Clone with HTTP" e.g. http://gitlab.itzroks-060000f2ee-hx8q5z-4b4a324f027aea19c5cbc0c3275c4656-0000.hkg02.containers.appdomain.cloud/ns-6/catalogue.git
+![Alt text](./pic/clonegitlink.png?raw=true)
+
+7. Go back to OpenShift term and set the catalogue point to link generated by "Clone with HTTP" above. e.g as below
+```bash
+pwd
+cd catalogue
+pwd
+git init
+git remote add origin http://gitlab.itzroks-060000f2ee-hx8q5z-4b4a324f027aea19c5cbc0c3275c4656-0000.hkg02.containers.appdomain.cloud/ns-6/catalogue.git
+``` 
+![Alt text](./pic/createcataloguebutton.png?raw=true)
+
+
+### Lab 7 : Trigger CICD pipeline with source code checkin 
+1. Back to the OpenShift console UI. Click "Project" and click "turbonomic"
+![Alt text](./pic/turbonomicproject.png?raw=true) 
+
+### Lab 8 : Assure application performance by Turbonomic
 1. Back to the OpenShift console UI. Click "Project" and click "turbonomic"
 ![Alt text](./pic/turbonomicproject.png?raw=true) 
  

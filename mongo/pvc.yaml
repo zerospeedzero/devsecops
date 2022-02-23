@@ -9,5 +9,5 @@ spec:
   resources:
     requests:
       storage: 1G
-  storageClassName: managed-nfs-storage
+  storageClassName: ibmc-file-gold-gid
   volumeMode: Filesystem
