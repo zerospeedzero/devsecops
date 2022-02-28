@@ -314,6 +314,14 @@ git push origin master
 ![Alt text](./pic/instana3.png?raw=true)
 ![Alt text](./pic/instana4.png?raw=true)
 
+8. On the Instana Dashboard, click Time range button at the right top. Click "Releases"
+![Alt text](./pic/release1.png?raw=true)
+
+9. Copy the URL of the pipeline by mousing selecting the text in above screen on the first release. Then, open another browser tab and place the URL on the box.
+![Alt text](./pic/release2.png?raw=true)
+
+10. Click the commit hash (e.g. a22835c), it will show the change for this commit.
+![Alt text](./pic/release3.png?raw=true)
 
 ### Lab 8 : Assure application performance by Turbonomic
 1. Back to the OpenShift console UI. Click "Project" and click "turbonomic"
