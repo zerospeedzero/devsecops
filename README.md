@@ -304,6 +304,17 @@ git push origin master
 5. Click the latest pipeline and check all the stages are completed successfully.
 ![Alt text](./pic/gitclone5.png?raw=true) 
 
+6. On the OpenShift terminal, execute 'oc get route' and copy the route url for ns-{1..20} and paste it to browser (http protocol). Notice the express service is changed to use the new version of the express server. 
+![Alt text](./pic/nodejsexpress1.png?raw=true)
+![Alt text](./pic/nodejsexpress3.png?raw=true)
+
+7. Go back to Instana Dashboard. Click your application perspective (e.g. ns-6). Then, click "Dependencies". Locate to the ns-{1..20} (e.g. ns-6) and right click it and then select "Dashboard" You will notice that there is an pipeline integration marker on the dashbaord to show new version of microservice is applied and its GitLab pipeline url. Also, you will notice there is no service interruption in this version upgrade since OpenShift deployment rollingUpdate strategy is used. 
+![Alt text](./pic/instana1.png?raw=true)
+![Alt text](./pic/instana2.png?raw=true)
+![Alt text](./pic/instana3.png?raw=true)
+![Alt text](./pic/instana4.png?raw=true)
+
+
 ### Lab 8 : Assure application performance by Turbonomic
 1. Back to the OpenShift console UI. Click "Project" and click "turbonomic"
 ![Alt text](./pic/turbonomicproject.png?raw=true) 
@@ -317,4 +328,4 @@ git push origin master
 ![Alt text](./pic/turbodashboard.png?raw=true) 
 ![Alt text](./pic/turboapp.png?raw=true) 
 ![Alt text](./pic/turboapp1.png?raw=true) 
-# End of the page
+# End of the Labs
