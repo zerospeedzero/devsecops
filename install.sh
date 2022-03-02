@@ -12,7 +12,7 @@ fi
 echo "Deploy Robot-shop application under project $project"
 
 cd /home/user/devsecops
-for i in `ls |egrep -v 'README|pic|install'`
+for i in `ls |egrep -v 'README|pic|install|refresh'`
 do
     oc apply -f $i -n $project
 done
