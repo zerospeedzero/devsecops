@@ -13,10 +13,10 @@ More reference documentation and links as below
 ## Hand-on Lab environment
 ### Pre-requisite of attending this hand-on labs   
 
-1. Workstation OS: Windows 10, Mac or Linux  
+1. Workstation OS: Windows, Mac or Linux  
 2. Browser : Firefox or Chrome  
 3. Network : Internet Connection  
-4. Workstation privilege : Change browser setting for proxy (provided in Lab)
+4. Workstation privilege : Change browser setting for proxy (provided in Lab) or local host file
 5. IBMID (register it from https://cloud.ibm.com and send your email to chenggck@hk1.ibm.com)  
 
 ### Lab environment description 
@@ -33,7 +33,7 @@ More reference documentation and links as below
 Open browser with URL : https://console-openshift-console.itzroks-060000f2ee-fbolfc-4b4a324f027aea19c5cbc0c3275c4656-0000.hkg02.containers.appdomain.cloud/ (Your IBMID registered in IBM Cloud https://cloud.ibm.com e.g temp2222temp@gmail.com in this lab example)  
 ![Alt text](./pic/ibmlogin.png?raw=true) 
 
-2. Dasboard of RedHat OpenShift will be shown as below (Be reminded you are now logged in as OCP cluster admin and you get privilege to perform cluster level destructive actions. Just focus on your own OCP project please)  
+2. Dasboard of RedHat OpenShift will be shown as below (Be reminded you are now logged in as OCP cluster admin and you get privilege to perform any cluster level destructive actions including destroy the whole lab. Just focus on your own OCP project please)  
 ![Alt text](./pic/ocpproject.png?raw=true) 
 
 3. Start the OpenShift web terminal by click the >_ button on the top right concer of the OCP Web GUI. It may take one or several minutes for the terminal to show up.   
@@ -61,7 +61,7 @@ oc get pod
 watch 'oc get pod'   
 ```
 ![Alt text](./pic/allpodsrunning.png?raw=true)  
-Also, you is able to check the deployment status of those services via OCP Web GUI  (Ensure in you are in the project e.g. ns-6)
+Also, you is able to check the deployment status of those services via OCP Web GUI. Click "Workload"->"Deployment" and select project in combobox at the center top.  (Ensure in you are in the project e.g. ns-6)
 ![Alt text](./pic/deployment.png?raw=true) 
 
 ### Lab 2 : Access to Instana server and create application perspective  
@@ -121,9 +121,9 @@ oc get route
 ```
 ![Alt text](./pic/exposeroute.png?raw=true)  
 
-7. Open an browser and input the URL (returned from the oc get route command as the second token). You should be access to access the Robot Shop application.
+7. Open an browser and input the URL (returned from the oc get route command as the second token). You should be access to access the Robot Shop application. Ensure it is http protocol.
 ![Alt text](./pic/robotshopfront.png?raw=true)  
-8. Register your username with password and it will login automatically   
+8. Register your username with password (dummy email account and password) and it will login automatically   
 ![Alt text](./pic/register.png?raw=true)  
 
 9. Generate traffic for browsing catalogues for "Artifical Intelligence" and then "Ewooid". Also, click "Robot" and then "Exceptional Medical Machine" or just randamly click these pages under Categories.     
@@ -136,10 +136,10 @@ oc get route
 12. Click "Cart" link and check "Checkout" button. Optional, you may try other links like shipping and payment for traffic generation.
 ![Alt text](./pic/checkout.png?raw=true)
 
-13. Go back to the website monitoring. You will see EUM data on the dashboard. Optional, if time allowed, you may drill down the end-to-end transaction result on this page later.
+13. Go back to the website monitoring (second icon on the left toolbar). Then, click your project name. You will see EUM data on the dashboard. Optional, if time allowed, you may drill down the end-to-end transaction result on this page later.
 ![Alt text](./pic/websitedashboard.png?raw=true)
 ### Lab 4 : Application perspective monitoring  
-1. Click "Application perspective" icon on the left toolbar and then your application created in previous lab. You should be able to inspect the Application in Instana  
+1. Click "Application perspective" icon on the left toolbar and then your application name created in previous lab. You should be able to inspect the Application in Instana  
 ![Alt text](./pic/example1.png?raw=true)  
 2. Click "Dependencies" tab
 ![Alt text](./pic/example2.png?raw=true) 
@@ -179,12 +179,17 @@ oc get route
 ![Alt text](./pic/disabledevops1.png?raw=true)
 ![Alt text](./pic/disabledevops2.png?raw=true)
 
-9. Include Instana package in package.json file. Click file "package.json" and click "Edit" button. Once the instana package is included. Click "Commit" button 
+9. Include Instana package in package.json file. Click file "package.json" and click "Edit" button. Once the instana package is included. Click "Commit" button
+```bash
+"@instana/collector": "^1.132.2",
+``` 
 ![Alt text](./pic/includeinstanapackage.png?raw=true)
 
 10. Include "require('@instana/collector')();" at the top of bin/www file. Click edit and paste this statement and then click "Commit" button  
 ![Alt text](./pic/requirestatement.png?raw=true)
-
+```bash
+require('@instana/collector')();
+```
 11. Click "CI/CD" -> "Editor" and then click "Create new CI/CD pipeline"
 ![Alt text](./pic/cicdpipeline.png?raw=true)
 
@@ -253,17 +258,15 @@ deploy-job:      # This job runs in the deploy stage.
 ![Alt text](./pic/pipelineresult3.png?raw=true)
 ![Alt text](./pic/pipelineresult4.png?raw=true)
 
-15. On the OpenShift terminal, execute 'oc get route' and copy the route url for ns-{1..20} and paste it to browser (http protocol). Please refresh it for several times to generate traffic to this new deploy microservice
+15. On the OpenShift terminal, execute 'oc get route' and copy the route url for ns-{1..20} and paste it (second token ns-{1..20}) to browser (http protocol). Please refresh it for several times to generate traffic to this new deploy microservice
 ![Alt text](./pic/nodejsexpress1.png?raw=true)
 ![Alt text](./pic/nodejsexpress2.png?raw=true)
 
-16. On the OpenShift terminal, execute 'oc get route' and copy the route url for ns-{1..20} and paste it to browser (http protocol). Please refresh it for several times to generate traffic to this new deploy microservice
-![Alt text](./pic/nodejsexpress1.png?raw=true)
 
-17. Go to Instana Dashboard for your application perspective (e.g. ns-6). Enable last hour interval and click "Live" button. You will find ns-6 microservice is automatically detected by Instana on the topology but it is not connected with other microservices need they are not dependent.
+16. Go to Instana Dashboard for your application perspective (e.g. ns-6). Enable last hour interval and click "Live" button. You will find ns-6 microservice is automatically detected by Instana on the topology but it is not connected with other microservices need they are not dependent.
 ![Alt text](./pic/instanadashboard1.png?raw=true)
 
-18. Go OpenShift terminal and execute the following command to make ns-{1..20} as dummy payment gateway  
+17. Go OpenShift terminal and execute the following command to make ns-{1..20} as dummy payment gateway  
 ```bash
 oc set env deploy/payment PAYMENT_GATEWAY="http://ns-{1..20}:5000"
 e.g.
@@ -271,7 +274,7 @@ oc set env deploy/payment PAYMENT_GATEWAY="http://ns-6:5000"
 ```
 ![Alt text](./pic/setdummypaymentgateway.png?raw=true)
 
-19. Wait for 5 minutes, the new topology will be discovered and refresh for active monitoring.
+18. Wait for 5 minutes, the new topology will be discovered and refresh for active monitoring.
 ![Alt text](./pic/newtopology.png?raw=true)
 
 ### Lab 7 : Trigger CICD pipeline with source code checkin 
