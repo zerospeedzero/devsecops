@@ -27,6 +27,9 @@ More reference documentation and links as below
 4. An Instana backend server is deployed within an virtual server.
 5. Access link and account name with password will be provided.    
 
+![Alt text](./pic/enviornment.png?raw=true) 
+(Watson AIOps is not included in this workshop)
+
 ## Labs for GitLab and Instana and Turbonomic
 ### Lab 1 : Deploy and start Robot Shop microservice  
 1. Login to  Openshift Web console and input the IBMID provided in the Lab  
