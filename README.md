@@ -1,4 +1,4 @@
-# DevSecOps workshop for customer (Work in progress)
+# DevSecOps workshop for customer 
 
 ## References for IBM DevSecOps and AIOPs products
 More reference documentation and links as below
